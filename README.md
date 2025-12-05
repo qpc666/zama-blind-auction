@@ -55,6 +55,23 @@ To deploy to the Zama Devnet:
     npx hardhat run scripts/deploy.ts --network zama
     ```
 
+### Frontend
+
+1.  Navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies (if not done):
+    ```bash
+    npm install
+    ```
+3.  Start the dev server:
+    ```bash
+    npm run dev
+    ```
+4.  Open `http://localhost:5173` in your browser.
+
+
 ## License
 
 MIT
