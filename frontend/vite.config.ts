@@ -8,7 +8,14 @@ export default defineConfig({
   base: "/confidential-blind-auction/",
   plugins: [
     react(),
-    nodePolyfills()
+    nodePolyfills({
+      globals: {
+        Buffer: true,
+        global: true,
+        process: true,
+      },
+      protocolImports: true,
+    })
   ],
   build: {
     target: "esnext"
