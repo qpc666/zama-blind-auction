@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserProvider, Contract, ContractFactory, hexlify } from 'ethers';
+import { BrowserProvider, Contract, hexlify } from 'ethers';
 // @ts-ignore: SDK types might need specific config
 import { createInstance, initSDK, SepoliaConfig } from '@zama-fhe/relayer-sdk/web';
 import BlindAuctionArtifact from './BlindAuctionArtifact.json';
@@ -12,12 +12,15 @@ declare global {
   }
 }
 
+// The deployed contract address on Zama Sepolia
+const CONTRACT_ADDRESS = "0xe120C581375231ed802544BCec11e8E58d1eFe4b";
+
 function App() {
   const [account, setAccount] = useState<string | null>(null);
   const [fhevmInstance, setFhevmInstance] = useState<any>(null);
   const [bidAmount, setBidAmount] = useState("");
   const [status, setStatus] = useState("");
-  const [contractAddress, setContractAddress] = useState("0x5FbDB2315678afecb367f032d93F642f64180aa3"); // Default, will be updated
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     init();
@@ -39,7 +42,7 @@ function App() {
         // Create Instance using SepoliaConfig
         const instance = await createInstance(SepoliaConfig);
         setFhevmInstance(instance);
-        setStatus("Ready to bid! (Or deploy contract first)");
+        setStatus("Ready to bid!");
       } catch (e: any) {
         console.error("Initialization error:", e);
         setStatus("Error: " + (e.message || "Connection failed"));
@@ -79,47 +82,26 @@ function App() {
     }
   };
 
-  const deployContract = async () => {
-    if (!account) return;
-    try {
-      setStatus("Deploying contract... Please confirm in wallet.");
-      const provider = new BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-
-      const factory = new ContractFactory(BlindAuctionArtifact.abi, BlindAuctionArtifact.bytecode, signer);
-      const contract = await factory.deploy();
-
-      setStatus("Waiting for deployment confirmation...");
-      await contract.waitForDeployment();
-
-      const deployedAddress = await contract.getAddress();
-      setContractAddress(deployedAddress);
-      setStatus(`Contract deployed at: ${deployedAddress}`);
-      console.log("Contract deployed to:", deployedAddress);
-    } catch (e: any) {
-      console.error("Deployment error:", e);
-      setStatus("Deployment failed: " + (e.message || "Unknown error"));
-    }
-  };
-
   const handleBid = async () => {
     if (!fhevmInstance || !account) return;
 
     try {
+      setIsLoading(true);
       setStatus("Encrypting bid...");
       const provider = new BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contract = new Contract(contractAddress, BlindAuctionArtifact.abi, signer);
+      const contract = new Contract(CONTRACT_ADDRESS, BlindAuctionArtifact.abi, signer);
 
       // Encrypt the bid amount (uint32)
       const amount = parseInt(bidAmount);
-      if (isNaN(amount)) {
-        setStatus("Invalid bid amount");
+      if (isNaN(amount) || amount <= 0) {
+        setStatus("Please enter a valid bid amount.");
+        setIsLoading(false);
         return;
       }
 
       // Encrypt using @zama-fhe/relayer-sdk
-      const input = fhevmInstance.createEncryptedInput(contractAddress, account);
+      const input = fhevmInstance.createEncryptedInput(CONTRACT_ADDRESS, account);
       input.add32(amount);
       const result = await input.encrypt();
 
@@ -129,49 +111,70 @@ function App() {
       const tx = await contract.bid(handle);
       await tx.wait();
 
-      setStatus("Bid submitted successfully!");
+      setStatus("Bid submitted successfully! 🚀");
+      setBidAmount("");
     } catch (e: any) {
       console.error(e);
       setStatus("Error: " + (e.message || "Unknown error"));
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="container">
-      <h1>Confidential Blind Auction</h1>
-      <div className="card">
-        {!account ? (
-          <button onClick={init}>Connect Wallet</button>
-        ) : (
-          <div>
-            <p>Connected: {account.slice(0, 6)}...{account.slice(-4)}</p>
+    <div className="app-container">
+      <div className="content-wrapper">
+        <header className="app-header">
+          <h1>Confidential Blind Auction</h1>
+          <p className="subtitle">Powered by Zama FHE</p>
+        </header>
 
-            <div className="deploy-section" style={{ marginBottom: '20px', padding: '10px', border: '1px solid #333', borderRadius: '8px' }}>
-              <h3>1. Deploy Contract</h3>
-              <p style={{ fontSize: '0.8em', color: '#aaa' }}>Current Address: {contractAddress}</p>
-              <button onClick={deployContract}>Deploy New Contract</button>
+        <div className="auction-card">
+          {!account ? (
+            <div className="connect-state">
+              <p>Connect your wallet to participate in the encrypted auction.</p>
+              <button className="primary-btn" onClick={init}>Connect Wallet</button>
             </div>
+          ) : (
+            <div className="bid-state">
+              <div className="wallet-info">
+                <span className="indicator"></span>
+                Connected: {account.slice(0, 6)}...{account.slice(-4)}
+              </div>
 
-            <div className="bid-form">
-              <h3>2. Place Bid</h3>
-              <input
-                type="number"
-                placeholder="Enter bid amount"
-                value={bidAmount}
-                onChange={(e) => setBidAmount(e.target.value)}
-              />
-              <button onClick={handleBid} disabled={!fhevmInstance}>
-                Encrypt & Bid
+              <div className="input-group">
+                <label>Your Bid Amount</label>
+                <input
+                  type="number"
+                  placeholder="0.00"
+                  value={bidAmount}
+                  onChange={(e) => setBidAmount(e.target.value)}
+                  disabled={isLoading}
+                />
+              </div>
+
+              <button
+                className="primary-btn bid-btn"
+                onClick={handleBid}
+                disabled={!fhevmInstance || isLoading}
+              >
+                {isLoading ? <span className="loader"></span> : "Encrypt & Place Bid"}
               </button>
+
+              {status && <div className={`status-message ${status.includes("Error") ? "error" : "success"}`}>
+                {status}
+              </div>}
             </div>
-            {status && <p className="status">{status}</p>}
-          </div>
-        )}
+          )}
+        </div>
+
+        <footer className="app-footer">
+          <p>
+            <span className="lock-icon">🔒</span>
+            Bids are end-to-end encrypted. Only the smart contract can see the actual amount.
+          </p>
+        </footer>
       </div>
-      <p className="info">
-        This is a confidential auction. Your bid is encrypted locally before being sent to the blockchain.
-        Only the smart contract can determine the winner.
-      </p>
     </div>
   );
 }
