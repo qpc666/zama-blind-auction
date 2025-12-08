@@ -69,26 +69,19 @@ function LandingPage({ onStart }: { onStart: () => void }) {
       </section>
 
       {/* Visual Diagram Section */}
-      <section className="diagram-section">
+      <section className="visual-section">
         <h2>How It Works</h2>
-        <div className="process-flow">
-          <div className="flow-step">
-            <div className="step-icon">🔒</div>
-            <h3>Encrypt</h3>
-            <p>Your bid is encrypted locally on your device using FHE keys.</p>
-          </div>
-          <div className="flow-arrow">→</div>
-          <div className="flow-step">
-            <div className="step-icon">⚡</div>
-            <h3>Submit</h3>
-            <p>The encrypted ciphertext is sent to the Sepolia blockchain.</p>
-          </div>
-          <div className="flow-arrow">→</div>
-          <div className="flow-step">
-            <div className="step-icon">🙈</div>
-            <h3>Compute</h3>
-            <p>Smart contract compares encrypted bids without decrypting them.</p>
-          </div>
+        <div className="image-container">
+          <img src="/confidential-blind-auction/assets/diagram.png" alt="Confidential Auction Process" className="visual-img" />
+        </div>
+      </section>
+
+      {/* Market Analysis Section */}
+      <section className="visual-section">
+        <h2>Privacy Market Growth</h2>
+        <p className="section-desc">The demand for confidential transactions is skyrocketing. Join the revolution.</p>
+        <div className="image-container">
+          <img src="/confidential-blind-auction/assets/chart.png" alt="Market Growth Chart" className="visual-img" />
         </div>
       </section>
 
@@ -115,41 +108,10 @@ function LandingPage({ onStart }: { onStart: () => void }) {
       </section>
 
       {/* Roadmap Section */}
-      <section className="roadmap-section">
+      <section className="visual-section">
         <h2>Product Roadmap</h2>
-        <div className="timeline">
-          <div className="timeline-item">
-            <div className="timeline-dot active"></div>
-            <div className="timeline-content">
-              <span className="timeline-date">Q4 2024</span>
-              <h3>Alpha Launch</h3>
-              <p>Deployment on Zama Sepolia. Basic blind auction functionality with FHE integration.</p>
-            </div>
-          </div>
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <span className="timeline-date">Q1 2025</span>
-              <h3>Multi-Asset Support</h3>
-              <p>Integration with ERC-20 tokens (USDC, USDT). Encrypted balances and allowances.</p>
-            </div>
-          </div>
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <span className="timeline-date">Q2 2025</span>
-              <h3>Vickrey Mechanism</h3>
-              <p>Advanced auction types: Second-price auctions to encourage truthful bidding.</p>
-            </div>
-          </div>
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <span className="timeline-date">Q3 2025</span>
-              <h3>Mainnet Release</h3>
-              <p>Official launch on Zama Mainnet. Enterprise API for high-value asset procurement.</p>
-            </div>
-          </div>
+        <div className="image-container">
+          <img src="/confidential-blind-auction/assets/roadmap.png" alt="Product Roadmap" className="visual-img" />
         </div>
       </section>
     </div>

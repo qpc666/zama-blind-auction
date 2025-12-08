@@ -156,6 +156,93 @@ body::before {
 
 /* ... Landing Page Styles ... */
 
+/* Visual Sections */
+.visual-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: -1rem 0 2rem 0;
+  line-height: 1.6;
+}
+
+.image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.visual-img {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.visual-img:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px -12px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  transition: all 0.3s;
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-5px);
+  border-color: var(--primary-color);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* App Header (Auction App) */
 .app-header {
   text-align: center;
