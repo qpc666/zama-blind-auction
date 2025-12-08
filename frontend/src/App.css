@@ -148,308 +148,22 @@ body::before {
   /* Limit width for App view */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  /* Force children to center */
   gap: 2rem;
   animation: slideUp 0.6s ease-out;
   margin: auto;
   /* Perfect center (vertical & horizontal) */
 }
 
-/* Landing Page Styles */
-.landing-page {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 6rem;
-  padding-bottom: 4rem;
-  animation: fadeIn 0.8s ease-out;
-  margin: 0 auto;
-  /* Horizontal center */
-}
-
-section {
-  text-align: center;
-}
-
-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  background: linear-gradient(to right, #fff, #94a3b8);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Hero Section */
-.hero-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 0;
-}
-
-.hero-badge {
-  background: rgba(99, 102, 241, 0.1);
-  color: var(--primary-color);
-  padding: 0.5rem 1rem;
-  border-radius: 99px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-}
-
-.hero-title {
-  font-size: 4rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin: 0 0 1.5rem 0;
-  max-width: 800px;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero-subtitle {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  line-height: 1.6;
-  margin-bottom: 2.5rem;
-}
-
-.cta-btn {
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  font-size: 1.125rem;
-  font-weight: 600;
-  border-radius: 99px;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-}
-
-.cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5);
-}
-
-.arrow {
-  transition: transform 0.2s;
-}
-
-.cta-btn:hover .arrow {
-  transform: translateX(4px);
-}
-
-/* Diagram Section */
-.process-flow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.flow-step {
-  background: var(--card-bg);
-  padding: 2rem;
-  border-radius: 24px;
-  border: 1px solid var(--border-color);
-  width: 280px;
-  transition: transform 0.3s;
-}
-
-.flow-step:hover {
-  transform: translateY(-5px);
-  border-color: var(--primary-color);
-}
-
-.step-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.flow-step h3 {
-  color: var(--text-primary);
-  margin: 0 0 0.5rem 0;
-}
-
-.flow-step p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.flow-arrow {
-  font-size: 2rem;
-  color: var(--text-secondary);
-  opacity: 0.5;
-}
-
-/* Features Grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.feature-card {
-  background: rgba(255, 255, 255, 0.02);
-  padding: 2rem;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  text-align: left;
-  transition: all 0.3s;
-}
-
-.feature-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.feature-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  background: rgba(99, 102, 241, 0.1);
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-}
-
-.feature-card h3 {
-  margin: 0 0 0.5rem 0;
-  color: var(--text-primary);
-}
-
-.feature-card p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Roadmap Section */
-.timeline {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  padding-left: 2rem;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 3rem;
-  padding-left: 2rem;
-  text-align: left;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -2.6rem;
-  top: 0;
-  width: 20px;
-  height: 20px;
-  background: var(--bg-dark);
-  border: 2px solid var(--text-secondary);
-  border-radius: 50%;
-  transition: all 0.3s;
-}
-
-.timeline-dot.active {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  box-shadow: 0 0 15px var(--primary-color);
-}
-
-.timeline-date {
-  font-size: 0.875rem;
-  color: var(--primary-color);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.timeline-content h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
-  color: var(--text-primary);
-}
-
-.timeline-content p {
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-/* Content Cards (Intro & Future) */
-.content-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: var(--glass-shadow);
-  color: var(--text-secondary);
-  line-height: 1.6;
-  animation: slideUp 0.6s ease-out;
-}
-
-.content-card h2 {
-  color: var(--text-primary);
-  margin-top: 0;
-  font-size: 1.8rem;
-}
-
-.content-card h3 {
-  color: var(--primary-color);
-  margin-top: 1.5rem;
-}
-
-.content-card strong {
-  color: var(--text-primary);
-}
-
-.content-card ul {
-  padding-left: 1.5rem;
-}
-
-.content-card li {
-  margin-bottom: 0.5rem;
-}
-
-/* Roadmap Items */
-.roadmap-item {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.roadmap-item:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.roadmap-item h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
+/* ... Landing Page Styles ... */
 
 /* App Header (Auction App) */
 .app-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
@@ -462,17 +176,16 @@ section h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.025em;
+  width: 100%;
+  /* Ensure full width for text-align to work if needed */
 }
 
-.subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  margin: 0;
-  font-weight: 500;
-}
+/* ... */
 
 /* Card Component (Auction App) */
 .auction-card {
+  width: 100%;
+  /* Ensure full width of wrapper */
   background: var(--card-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -482,148 +195,18 @@ section h2 {
   box-shadow: var(--glass-shadow);
 }
 
-/* Connect Wallet State */
-.connect-state {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.connect-state p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Bid State */
-.bid-state {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.wallet-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  margin-bottom: 0.5rem;
-}
-
-.indicator {
-  width: 8px;
-  height: 8px;
-  background-color: var(--success-color);
-  border-radius: 50%;
-  box-shadow: 0 0 12px var(--success-color);
-}
-
-/* Inputs */
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.input-group label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-left: 4px;
-}
-
-input[type="number"] {
-  width: 100%;
-  padding: 1rem 1.25rem;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  outline: none;
-}
-
-input[type="number"]:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-  background: rgba(0, 0, 0, 0.4);
-}
-
-/* Buttons */
-.primary-btn {
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-  color: white;
-  border: none;
-  padding: 1.25rem;
-  font-size: 1.125rem;
-  font-weight: 600;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.primary-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-}
-
-.primary-btn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.primary-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  filter: grayscale(100%);
-}
-
-/* Status Messages */
-.status-message {
-  padding: 1rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  text-align: center;
-  font-weight: 500;
-  animation: fadeIn 0.3s ease;
-}
-
-.status-message.success {
-  background: rgba(16, 185, 129, 0.1);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-.status-message.error {
-  background: rgba(239, 68, 68, 0.1);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
+/* ... */
 
 /* Footer */
 .app-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   color: var(--text-secondary);
   font-size: 0.875rem;
   opacity: 0.8;
-}
-
-.app-footer p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
 }
 
 /* Loader */
