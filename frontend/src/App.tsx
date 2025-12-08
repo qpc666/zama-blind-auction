@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserProvider, Contract } from 'ethers';
-import { createInstance } from 'fhevmjs';
+// @ts-ignore: SDK types might need specific config
+import { createInstance, initSDK, SepoliaConfig } from '@zama-fhe/relayer-sdk/web';
 import './App.css';
 
 // Extend Window interface for Ethereum provider
@@ -38,19 +39,11 @@ function App() {
         // Force switch to Sepolia
         await switchNetwork(window.ethereum);
 
-        // Initialize FHEVM
-        const network = await provider.getNetwork();
-        console.log("Connected to chain:", network.chainId);
+        // Initialize SDK
+        await initSDK();
 
-        // Configuration for Zama Sepolia Testnet
-        // @ts-ignore: Suppress config type error
-        const instance = await createInstance({
-          chainId: Number(network.chainId),
-          networkUrl: "https://sepolia.rpc.zama.ai",
-          gatewayUrl: "https://gateway.sepolia.zama.ai/",
-          kmsContractAddress: "0xbE0E383937d564D7FF0BC3b46c51f0bF8d5C311A", // KMS Verifier
-          aclContractAddress: "0xf0Ffdc93b7E186bC2f8CB3dAA75D86d1930A433D"  // ACL
-        });
+        // Create Instance using SepoliaConfig
+        const instance = await createInstance(SepoliaConfig);
         setFhevmInstance(instance);
         setStatus("Ready to bid!");
       } catch (e: any) {
@@ -102,22 +95,20 @@ function App() {
       const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
       // Encrypt the bid amount (uint32)
-      // The input must be an integer
       const amount = parseInt(bidAmount);
       if (isNaN(amount)) {
         setStatus("Invalid bid amount");
         return;
       }
 
-      // Encrypt using fhevmjs
-      // Note: The exact API might vary slightly based on fhevmjs version.
-      // Typically: instance.encrypt32(amount) returns a ciphertext handle or bytes.
-      // For the current version, we usually generate a ciphertext for the contract.
-      // This is a simplified example.
-      const encrypted = await fhevmInstance.encrypt32(amount);
+      // Encrypt using @zama-fhe/relayer-sdk
+      const input = fhevmInstance.createEncryptedInput(CONTRACT_ADDRESS, account);
+      input.add32(amount);
+      const result = await input.encrypt();
 
       setStatus("Submitting transaction...");
-      const tx = await contract.bid(encrypted.handles[0]); // Adjust based on actual return structure
+      // Pass the encrypted handle to the contract
+      const tx = await contract.bid(result.handles[0]);
       await tx.wait();
 
       setStatus("Bid submitted successfully!");

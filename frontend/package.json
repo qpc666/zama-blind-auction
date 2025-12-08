@@ -12,8 +12,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@zama-fhe/relayer-sdk": "^0.3.0-6",
     "ethers": "^6.16.0",
-    "fhevmjs": "^0.6.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
