@@ -47,9 +47,9 @@ function App() {
         const instance = await createInstance({
           chainId: Number(network.chainId),
           networkUrl: "https://sepolia.rpc.zama.ai",
-          gatewayUrl: "https://relayer.testnet.zama.org",
-          kmsContractAddress: "0x1364cBBf2cDF5032C47d8226a6f6FBD2AFCDacAC", // KMS Verifier
-          aclContractAddress: "0x687820221192C5B662b25367F70076A37bc79b6c"  // ACL
+          gatewayUrl: "https://gateway.sepolia.zama.ai/",
+          kmsContractAddress: "0xbE0E383937d564D7FF0BC3b46c51f0bF8d5C311A", // KMS Verifier
+          aclContractAddress: "0xf0Ffdc93b7E186bC2f8CB3dAA75D86d1930A433D"  // ACL
         });
         setFhevmInstance(instance);
         setStatus("Ready to bid!");
