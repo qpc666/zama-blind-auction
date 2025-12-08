@@ -86,6 +86,13 @@ body::before {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
 }
 
 .nav-links {
@@ -117,7 +124,8 @@ body::before {
 
 .main-content {
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
+  /* Wider for landing page */
   padding: 2rem;
   display: flex;
   justify-content: center;
@@ -127,10 +135,250 @@ body::before {
 
 .content-wrapper {
   width: 100%;
+  max-width: 480px;
+  /* Limit width for App view */
   display: flex;
   flex-direction: column;
   gap: 2rem;
   animation: slideUp 0.6s ease-out;
+  margin: 0 auto;
+}
+
+/* Landing Page Styles */
+.landing-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  padding-bottom: 4rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+section {
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+.hero-badge {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 1.5rem 0;
+  max-width: 800px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.cta-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5);
+}
+
+.arrow {
+  transition: transform 0.2s;
+}
+
+.cta-btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Diagram Section */
+.process-flow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.flow-step {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  width: 280px;
+  transition: transform 0.3s;
+}
+
+.flow-step:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-color);
+}
+
+.step-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.flow-step h3 {
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.flow-step p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.flow-arrow {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  transition: all 0.3s;
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Roadmap Section */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2.6rem;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-dark);
+  border: 2px solid var(--text-secondary);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.timeline-dot.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+.timeline-date {
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.timeline-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.timeline-content p {
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* Content Cards (Intro & Future) */
@@ -188,7 +436,7 @@ body::before {
   font-size: 1.1rem;
 }
 
-/* Header (Auction App) */
+/* App Header (Auction App) */
 .app-header {
   text-align: center;
 }

@@ -16,84 +16,140 @@ declare global {
 const CONTRACT_ADDRESS = "0xe120C581375231ed802544BCec11e8E58d1eFe4b";
 
 function App() {
-  const [activeTab, setActiveTab] = useState('app');
+  const [activeTab, setActiveTab] = useState('intro');
 
   return (
     <div className="app-container">
       <nav className="navbar">
-        <div className="nav-brand">Zama Auction</div>
+        <div className="nav-brand">
+          <span className="brand-icon">👁️‍🗨️</span> Zama Auction
+        </div>
         <div className="nav-links">
           <button
             className={activeTab === 'intro' ? 'active' : ''}
             onClick={() => setActiveTab('intro')}
           >
-            Introduction
+            Product
           </button>
           <button
             className={activeTab === 'app' ? 'active' : ''}
             onClick={() => setActiveTab('app')}
           >
-            Start Using
-          </button>
-          <button
-            className={activeTab === 'future' ? 'active' : ''}
-            onClick={() => setActiveTab('future')}
-          >
-            Future Outlook
+            Launch App
           </button>
         </div>
       </nav>
 
       <main className="main-content">
-        {activeTab === 'intro' && <Introduction />}
+        {activeTab === 'intro' && <LandingPage onStart={() => setActiveTab('app')} />}
         {activeTab === 'app' && <AuctionApp />}
-        {activeTab === 'future' && <FutureOutlook />}
       </main>
     </div>
   );
 }
 
-function Introduction() {
+function LandingPage({ onStart }: { onStart: () => void }) {
   return (
-    <div className="content-card intro-card">
-      <h2>What is Confidential Blind Auction?</h2>
-      <p>
-        Traditional auctions on public blockchains suffer from a major flaw:
-        <strong> Transparency</strong>. Everyone can see everyone else's bids.
-      </p>
-      <p>
-        This allows for predatory strategies like front-running and bid sniping,
-        destroying the fairness of the auction mechanism.
-      </p>
-      <h3>The Solution: Zama FHE</h3>
-      <p>
-        Powered by <strong>Fully Homomorphic Encryption (FHE)</strong>, our platform ensures:
-      </p>
-      <ul>
-        <li>🔒 <strong>End-to-End Privacy</strong>: Your bid is encrypted on your device.</li>
-        <li>🙈 <strong>Blind Execution</strong>: The smart contract computes the winner without ever decrypting the losing bids.</li>
-        <li>✅ <strong>Verifiable Fairness</strong>: The process is mathematically proven and executed on-chain.</li>
-      </ul>
-    </div>
-  );
-}
+    <div className="landing-page">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="hero-badge">Powered by Zama FHE</div>
+        <h1 className="hero-title">
+          The Future of Auctions is <span className="gradient-text">Confidential</span>
+        </h1>
+        <p className="hero-subtitle">
+          Experience the first verifiable blind auction on Ethereum.
+          Bid without revealing your strategy. Win without exposing your price.
+        </p>
+        <button className="cta-btn" onClick={onStart}>
+          Start Bidding Now <span className="arrow">→</span>
+        </button>
+      </section>
 
-function FutureOutlook() {
-  return (
-    <div className="content-card future-card">
-      <h2>Roadmap & Future Vision</h2>
-      <div className="roadmap-item">
-        <h3>Phase 1: Multi-Asset Support</h3>
-        <p>Enable bidding with ERC-20 tokens (USDC, USDT) using encrypted balances.</p>
-      </div>
-      <div className="roadmap-item">
-        <h3>Phase 2: Vickrey Auction Mechanism</h3>
-        <p>Implement second-price auctions where the winner pays the second-highest price, encouraging truthful bidding.</p>
-      </div>
-      <div className="roadmap-item">
-        <h3>Phase 3: Zama Mainnet Launch</h3>
-        <p>Deploy to Zama Mainnet for real-world high-value asset auctions (Real Estate, Art, Enterprise Procurement).</p>
-      </div>
+      {/* Visual Diagram Section */}
+      <section className="diagram-section">
+        <h2>How It Works</h2>
+        <div className="process-flow">
+          <div className="flow-step">
+            <div className="step-icon">🔒</div>
+            <h3>Encrypt</h3>
+            <p>Your bid is encrypted locally on your device using FHE keys.</p>
+          </div>
+          <div className="flow-arrow">→</div>
+          <div className="flow-step">
+            <div className="step-icon">⚡</div>
+            <h3>Submit</h3>
+            <p>The encrypted ciphertext is sent to the Sepolia blockchain.</p>
+          </div>
+          <div className="flow-arrow">→</div>
+          <div className="flow-step">
+            <div className="step-icon">🙈</div>
+            <h3>Compute</h3>
+            <p>Smart contract compares encrypted bids without decrypting them.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="features-section">
+        <h2>Why Confidentiality Matters</h2>
+        <div className="features-grid">
+          <div className="feature-card">
+            <div className="feature-icon">🛡️</div>
+            <h3>MEV Protection</h3>
+            <p>Prevent front-running and sandwich attacks. Bots can't exploit what they can't see.</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">⚖️</div>
+            <h3>True Fairness</h3>
+            <p>No more bid sniping. Every participant competes on equal footing, blind to others' moves.</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">🧩</div>
+            <h3>On-Chain Verifiability</h3>
+            <p>Unlike off-chain order books, every step is executed and verified on Ethereum.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Roadmap Section */}
+      <section className="roadmap-section">
+        <h2>Product Roadmap</h2>
+        <div className="timeline">
+          <div className="timeline-item">
+            <div className="timeline-dot active"></div>
+            <div className="timeline-content">
+              <span className="timeline-date">Q4 2024</span>
+              <h3>Alpha Launch</h3>
+              <p>Deployment on Zama Sepolia. Basic blind auction functionality with FHE integration.</p>
+            </div>
+          </div>
+          <div className="timeline-item">
+            <div className="timeline-dot"></div>
+            <div className="timeline-content">
+              <span className="timeline-date">Q1 2025</span>
+              <h3>Multi-Asset Support</h3>
+              <p>Integration with ERC-20 tokens (USDC, USDT). Encrypted balances and allowances.</p>
+            </div>
+          </div>
+          <div className="timeline-item">
+            <div className="timeline-dot"></div>
+            <div className="timeline-content">
+              <span className="timeline-date">Q2 2025</span>
+              <h3>Vickrey Mechanism</h3>
+              <p>Advanced auction types: Second-price auctions to encourage truthful bidding.</p>
+            </div>
+          </div>
+          <div className="timeline-item">
+            <div className="timeline-dot"></div>
+            <div className="timeline-content">
+              <span className="timeline-date">Q3 2025</span>
+              <h3>Mainnet Release</h3>
+              <p>Official launch on Zama Mainnet. Enterprise API for high-value asset procurement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
