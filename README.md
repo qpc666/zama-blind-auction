@@ -1,6 +1,6 @@
-# Zama Blind Auction
+# Confidential Blind Auction
 
-A confidential blind auction dApp built using Zama's fhEVM.
+A confidential blind auction dApp built using fhEVM.
 
 ## Overview
 

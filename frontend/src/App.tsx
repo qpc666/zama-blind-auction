@@ -92,7 +92,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Zama Blind Auction</h1>
+      <h1>Confidential Blind Auction</h1>
       <div className="card">
         {!account ? (
           <button onClick={init}>Connect Wallet</button>
