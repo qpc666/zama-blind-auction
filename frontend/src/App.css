@@ -1,47 +1,287 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* Reset & Base Styles */
 :root {
-  --primary-color: #646cff;
-  --primary-hover: #747bff;
-  --bg-color: #0f0f13;
-  --card-bg: rgba(28, 28, 35, 0.7);
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --primary-color: #6366f1;
+  /* Indigo 500 */
+  --primary-hover: #4f46e5;
+  /* Indigo 600 */
+  --bg-dark: #0f172a;
+  /* Slate 900 */
+  --card-bg: rgba(30, 41, 59, 0.7);
+  /* Slate 800 with opacity */
+  --text-primary: #f8fafc;
+  /* Slate 50 */
+  --text-secondary: #94a3b8;
+  /* Slate 400 */
+  --border-color: rgba(148, 163, 184, 0.1);
   --success-color: #10b981;
   --error-color: #ef4444;
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-body {
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Background Effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 25%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Main Layout */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 20px;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: slideUp 0.6s ease-out;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #646cff;
+}
+
+/* Card Component */
+.auction-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Connect Wallet State */
+.connect-state {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.connect-state p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Bid State */
+.bid-state {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  background-color: var(--success-color);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--success-color);
+}
+
+/* Inputs */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.input-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-left: 4px;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+input[type="number"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Buttons */
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  border: none;
+  padding: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 16px;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-button:hover {
-  border-color: #646cff;
+.primary-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
 }
 
-button:disabled {
-  background-color: #333;
+.primary-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.primary-btn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
+  filter: grayscale(100%);
 }
 
-.status {
-  margin-top: 15px;
-  color: #888;
+/* Status Messages */
+.status-message {
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
 }
 
-.info {
-  color: #666;
-  font-size: 0.9em;
-  max-width: 400px;
+.status-message.success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.app-footer p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Loader */
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
