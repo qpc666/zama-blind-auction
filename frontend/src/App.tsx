@@ -35,9 +35,10 @@ function App() {
         const accounts = await provider.send("eth_requestAccounts", []);
         setAccount(accounts[0]);
 
+        // Force switch to Zama Devnet
+        await switchNetwork(window.ethereum);
+
         // Initialize FHEVM
-        // Note: For Zama Devnet, chainId is 8009. For local, it might be 9000 or 31337.
-        // We need to fetch the public key from the node.
         const network = await provider.getNetwork();
         console.log("Connected to chain:", network.chainId);
 
@@ -48,9 +49,42 @@ function App() {
         // In production, provide kmsContractAddress and aclContractAddress if required by the SDK version.
         const instance = await createInstance({ chainId: Number(network.chainId) });
         setFhevmInstance(instance);
-      } catch (e) {
+        setStatus("Ready to bid!");
+      } catch (e: any) {
         console.error("Initialization error:", e);
-        setStatus("Error connecting to wallet or FHEVM");
+        setStatus("Error: " + (e.message || "Connection failed"));
+      }
+    }
+  };
+
+  const switchNetwork = async (provider: any) => {
+    const ZAMA_CHAIN_ID = '0x1f49'; // 8009
+    try {
+      await provider.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: ZAMA_CHAIN_ID }],
+      });
+    } catch (switchError: any) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902) {
+        await provider.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: ZAMA_CHAIN_ID,
+              chainName: 'Zama Devnet',
+              nativeCurrency: {
+                name: 'ZAMA',
+                symbol: 'ZAMA',
+                decimals: 18,
+              },
+              rpcUrls: ['https://devnet.zama.ai'],
+              blockExplorerUrls: ['https://main.explorer.zama.ai'],
+            },
+          ],
+        });
+      } else {
+        throw switchError;
       }
     }
   };
