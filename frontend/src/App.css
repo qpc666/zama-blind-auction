@@ -148,8 +148,6 @@ body::before {
   /* Limit width for App view */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* Force children to center */
   gap: 2rem;
   animation: slideUp 0.6s ease-out;
   margin: auto;
@@ -160,10 +158,6 @@ body::before {
 
 /* App Header (Auction App) */
 .app-header {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
 }
 
@@ -176,22 +170,17 @@ body::before {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.025em;
-  width: 100%;
-  /* Ensure full width for text-align to work if needed */
 }
 
 /* ... */
 
 /* Card Component (Auction App) */
 .auction-card {
-  width: 100%;
-  /* Ensure full width of wrapper */
   background: var(--card-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: 24px;
-  padding: 2.5rem;
   box-shadow: var(--glass-shadow);
 }
 
@@ -199,10 +188,6 @@ body::before {
 
 /* Footer */
 .app-footer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
   color: var(--text-secondary);
   font-size: 0.875rem;
