@@ -21,22 +21,24 @@ function App() {
   return (
     <div className="app-container">
       <nav className="navbar">
-        <div className="nav-brand">
-          <span className="brand-icon">👁️‍🗨️</span> Zama Auction
-        </div>
-        <div className="nav-links">
-          <button
-            className={activeTab === 'intro' ? 'active' : ''}
-            onClick={() => setActiveTab('intro')}
-          >
-            Product
-          </button>
-          <button
-            className={activeTab === 'app' ? 'active' : ''}
-            onClick={() => setActiveTab('app')}
-          >
-            Launch App
-          </button>
+        <div className="navbar-container">
+          <div className="nav-brand">
+            <span className="brand-icon">👁️‍🗨️</span> Zama Auction
+          </div>
+          <div className="nav-links">
+            <button
+              className={activeTab === 'intro' ? 'active' : ''}
+              onClick={() => setActiveTab('intro')}
+            >
+              Product
+            </button>
+            <button
+              className={activeTab === 'app' ? 'active' : ''}
+              onClick={() => setActiveTab('app')}
+            >
+              Launch App
+            </button>
+          </div>
         </div>
       </nav>
 
