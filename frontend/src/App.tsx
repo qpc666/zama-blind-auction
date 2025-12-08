@@ -46,6 +46,7 @@ function App() {
         // @ts-ignore: Suppress config type error
         const instance = await createInstance({
           chainId: Number(network.chainId),
+          networkUrl: "https://sepolia.rpc.zama.ai",
           kmsContractAddress: "0x1364cBBf2cDF5032C47d8226a6f6FBD2AFCDacAC", // KMS Verifier
           aclContractAddress: "0x687820221192C5B662b25367F70076A37bc79b6c"  // ACL
         });
