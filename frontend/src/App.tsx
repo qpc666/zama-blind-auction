@@ -35,19 +35,19 @@ function App() {
         const accounts = await provider.send("eth_requestAccounts", []);
         setAccount(accounts[0]);
 
-        // Force switch to Zama Devnet
+        // Force switch to Zama Devnet (9000)
         await switchNetwork(window.ethereum);
 
         // Initialize FHEVM
         const network = await provider.getNetwork();
         console.log("Connected to chain:", network.chainId);
 
-        // In a real app, you fetch the public key from the blockchain or hardcode if static
-        // const instance = await createInstance({ chainId: Number(network.chainId), publicKey: "..." });
-        // For this demo, we'll assume the instance creation works or mock it if needed.
-        // @ts-ignore: Suppress config type error for demo purposes.
-        // In production, provide kmsContractAddress and aclContractAddress if required by the SDK version.
-        const instance = await createInstance({ chainId: Number(network.chainId) });
+        // Use gatewayUrl for Zama Devnet 9000
+        // @ts-ignore: Suppress config type error
+        const instance = await createInstance({
+          chainId: Number(network.chainId),
+          gatewayUrl: "https://gateway.zama.ai"
+        });
         setFhevmInstance(instance);
         setStatus("Ready to bid!");
       } catch (e: any) {
@@ -58,7 +58,7 @@ function App() {
   };
 
   const switchNetwork = async (provider: any) => {
-    const ZAMA_CHAIN_ID = '0x1f49'; // 8009
+    const ZAMA_CHAIN_ID = '0x2328'; // 9000
     try {
       await provider.request({
         method: 'wallet_switchEthereumChain',
