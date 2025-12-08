@@ -47,7 +47,7 @@ function App() {
         const instance = await createInstance({
           chainId: Number(network.chainId),
           networkUrl: "https://sepolia.rpc.zama.ai",
-          gatewayUrl: "https://gateway.sepolia.zama.ai",
+          gatewayUrl: "https://relayer.testnet.zama.org",
           kmsContractAddress: "0x1364cBBf2cDF5032C47d8226a6f6FBD2AFCDacAC", // KMS Verifier
           aclContractAddress: "0x687820221192C5B662b25367F70076A37bc79b6c"  // ACL
         });
