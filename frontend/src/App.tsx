@@ -35,18 +35,19 @@ function App() {
         const accounts = await provider.send("eth_requestAccounts", []);
         setAccount(accounts[0]);
 
-        // Force switch to Zama Devnet (9000)
+        // Force switch to Sepolia
         await switchNetwork(window.ethereum);
 
         // Initialize FHEVM
         const network = await provider.getNetwork();
         console.log("Connected to chain:", network.chainId);
 
-        // Use gatewayUrl for Zama Devnet 9000
+        // Configuration for Zama Sepolia Testnet
         // @ts-ignore: Suppress config type error
         const instance = await createInstance({
           chainId: Number(network.chainId),
-          gatewayUrl: "https://gateway.zama.ai"
+          kmsContractAddress: "0x1364cBBf2cDF5032C47d8226a6f6FBD2AFCDacAC", // KMS Verifier
+          aclContractAddress: "0x687820221192C5B662b25367F70076A37bc79b6c"  // ACL
         });
         setFhevmInstance(instance);
         setStatus("Ready to bid!");
@@ -58,11 +59,11 @@ function App() {
   };
 
   const switchNetwork = async (provider: any) => {
-    const ZAMA_CHAIN_ID = '0x2328'; // 9000
+    const SEPOLIA_CHAIN_ID = '0xaa36a7'; // 11155111
     try {
       await provider.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: ZAMA_CHAIN_ID }],
+        params: [{ chainId: SEPOLIA_CHAIN_ID }],
       });
     } catch (switchError: any) {
       // This error code indicates that the chain has not been added to MetaMask.
@@ -71,15 +72,15 @@ function App() {
           method: 'wallet_addEthereumChain',
           params: [
             {
-              chainId: ZAMA_CHAIN_ID,
-              chainName: 'Zama Devnet',
+              chainId: SEPOLIA_CHAIN_ID,
+              chainName: 'Sepolia',
               nativeCurrency: {
-                name: 'ZAMA',
-                symbol: 'ZAMA',
+                name: 'Sepolia Ether',
+                symbol: 'SEP',
                 decimals: 18,
               },
-              rpcUrls: ['https://devnet.zama.ai'],
-              blockExplorerUrls: ['https://main.explorer.zama.ai'],
+              rpcUrls: ['https://sepolia.rpc.zama.ai'], // Using Zama's RPC for better compatibility
+              blockExplorerUrls: ['https://sepolia.etherscan.io'],
             },
           ],
         });
